@@ -35,6 +35,11 @@ public class RomanNumeralCalculatorTest {
         checkAddIsCommutative("V", "III", "VIII");
     }
 
+    @Test
+    public void add_willHandleNumeralsThatReduceMultipleOfTen() {
+        checkAddIsCommutative("IV", "I", "V");
+    }
+
     private void checkAddIsCommutative(final String a, final String b, final String expectedValue) {
         assertThat(calculator.add(a, b)).isEqualTo(expectedValue);
         assertThat(calculator.add(b, a)).isEqualTo(expectedValue);

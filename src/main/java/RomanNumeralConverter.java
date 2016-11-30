@@ -1,12 +1,12 @@
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 class RomanNumeralConverter {
 
     private final List<NumeralValueTuple> sortedNumerals;
-    private final List<NumeralValueTuple> sortedPowersOfTen;
-    private final List<NumeralValueTuple> sortedHalfPowersOfTen;
+    private final NumeralValueTuple nullTuple;
 
     RomanNumeralConverter() {
         this.sortedNumerals = Arrays.asList(
@@ -19,41 +19,51 @@ class RomanNumeralConverter {
                 new NumeralValueTuple('I', 1)
         );
 
-        this.sortedPowersOfTen = Arrays.asList(
-                new NumeralValueTuple('M', 1000),
-                new NumeralValueTuple('C', 100),
-                new NumeralValueTuple('X', 10),
-                new NumeralValueTuple('I', 1)
-        );
-
-        this.sortedHalfPowersOfTen = Arrays.asList(
-                new NumeralValueTuple('D', 500),
-                new NumeralValueTuple('L', 50),
-                new NumeralValueTuple('V', 5)
-        );
+        nullTuple = new NumeralValueTuple(' ', 0);
     }
 
     Optional<Integer> toInteger(final String numeral) {
-        final char firstCharacter = numeral.charAt(0);
-        final Optional<Integer> powerOfTenResult = getPowerOfTenTupleFor(firstCharacter)
-                .map(tuple -> tuple.getValue() * numeral.length());
+        final List<Optional<NumeralValueTuple>> numeralAsOptionalTuples = numeral.chars()
+                .mapToObj(this::mapCharacter)
+                .collect(Collectors.toList());
 
-        if (!powerOfTenResult.isPresent()) {
-            return getHalfPowerOfTenTupleFor(firstCharacter)
-                    .map(NumeralValueTuple::getValue);
+        if (numeralAsOptionalTuples.stream().anyMatch(optional -> !optional.isPresent())) {
+            return Optional.empty();
         }
 
-        return powerOfTenResult;
+        final List<NumeralValueTuple> numeralTuples = numeralAsOptionalTuples.stream()
+                .map(this::unpackOptional)
+                .collect(Collectors.toList());
+
+        return Optional.of(computeValueOfNumerals(numeralTuples));
     }
 
-    private Optional<NumeralValueTuple> getPowerOfTenTupleFor(final char numeral) {
-        return sortedPowersOfTen.stream()
-                .filter(tuple -> tuple.getNumeral().equals(numeral))
-                .findFirst();
+    private int computeValueOfNumerals(final List<NumeralValueTuple> numeralTuples) {
+        int value = 0;
+        NumeralValueTuple previous = nullTuple;
+        for (final NumeralValueTuple tuple : numeralTuples) {
+
+            if (previous.getValue() < tuple.getValue()) {
+                value = tuple.getValue() - value;
+            } else {
+                value += tuple.getValue();
+            }
+            previous = tuple;
+        }
+        return value;
     }
 
-    private Optional<NumeralValueTuple> getHalfPowerOfTenTupleFor(final char numeral) {
-        return sortedHalfPowersOfTen.stream()
+    private NumeralValueTuple unpackOptional(final Optional<NumeralValueTuple> numeralValueTuple) {
+        //noinspection OptionalGetWithoutIsPresent
+        return numeralValueTuple.get();
+    }
+
+    private Optional<NumeralValueTuple> mapCharacter(final int character) {
+        return getTuple((char) character, this.sortedNumerals);
+    }
+
+    private Optional<NumeralValueTuple> getTuple(final char numeral, final List<NumeralValueTuple> tupleList) {
+        return tupleList.stream()
                 .filter(tuple -> tuple.getNumeral().equals(numeral))
                 .findFirst();
     }

@@ -29,6 +29,18 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
+    public void toInteger_WillConvertNumeralThatIncreasesHalfPowerOfTen_Simple() throws Exception {
+        assertThat(this.converter.toInteger("VI")).hasValue(6);
+        assertThat(this.converter.toInteger("LX")).hasValue(60);
+        assertThat(this.converter.toInteger("DC")).hasValue(600);
+    }
+
+    @Test
+    public void toInteger_WillConvertNumeralThatReducesPowerOfTen_SingleReduction() throws Exception {
+        assertThat(this.converter.toInteger("IV")).hasValue(4);
+    }
+
+    @Test
     public void toInteger_WillConvertTwoRepeatedValues_PowersOfTen() throws Exception {
         assertThat(this.converter.toInteger("II")).hasValue(2);
         assertThat(this.converter.toInteger("XX")).hasValue(20);
