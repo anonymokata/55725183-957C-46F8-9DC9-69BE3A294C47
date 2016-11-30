@@ -18,4 +18,10 @@ public class RomanNumeralCalculatorTest {
         assertThat(result).isEqualTo("II");
     }
 
+    @Test
+    public void add_willHandleTripleRepetitions() {
+        assertThat(calculator.add("I", "II")).isEqualTo("III");
+        assertThat(calculator.add("II", "I")).isEqualTo("III");
+    }
+
 }
