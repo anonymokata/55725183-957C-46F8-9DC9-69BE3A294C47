@@ -14,20 +14,30 @@ public class RomanNumeralCalculatorTest {
 
     @Test
     public void add_willHandleTheMostSimpleCase() {
-        final String result = calculator.add("I", "I");
-        assertThat(result).isEqualTo("II");
+        assertThat(calculator.add("I", "I")).isEqualTo("II");
     }
 
     @Test
     public void add_willHandleTripleRepetitions() {
-        assertThat(calculator.add("I", "II")).isEqualTo("III");
-        assertThat(calculator.add("II", "I")).isEqualTo("III");
+        checkAddIsCommutative("I", "II", "III");
     }
 
     @Test
     public void add_willHandleNonMultiplesOfTen() {
         assertThat(calculator.add("V", "V")).isEqualTo("X");
         assertThat(calculator.add("D", "D")).isEqualTo("M");
+    }
+
+    @Test
+    public void add_willHandleMixedMultiplesOfTenWithNonMultiplesOfTen() {
+        checkAddIsCommutative("V", "I", "VI");
+        checkAddIsCommutative("V", "II", "VII");
+        checkAddIsCommutative("V", "III", "VIII");
+    }
+
+    private void checkAddIsCommutative(final String a, final String b, final String expectedValue) {
+        assertThat(calculator.add(a, b)).isEqualTo(expectedValue);
+        assertThat(calculator.add(b, a)).isEqualTo(expectedValue);
     }
 
     @Test
