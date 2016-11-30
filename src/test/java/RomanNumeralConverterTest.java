@@ -42,7 +42,9 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
-    public void toNumeral_WillConvertToTwoColumnNumeral_SimpleCase() throws Exception {
+    public void toNumeral_WillConvertToTwoColumnNumeral_PowersOfTen() throws Exception {
         assertThat(this.converter.toNumeral(2)).isEqualTo("II");
+        assertThat(this.converter.toNumeral(20)).isEqualTo("XX");
+        assertThat(this.converter.toNumeral(200)).isEqualTo("CC");
     }
 }

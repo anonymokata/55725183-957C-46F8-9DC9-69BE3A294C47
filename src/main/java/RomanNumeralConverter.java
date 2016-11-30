@@ -18,18 +18,16 @@ class RomanNumeralConverter {
 
     String toNumeral(final int value) {
         final StringBuilder builder = new StringBuilder();
-        for (final Map.Entry<Character, Integer> entry : multipleOfTenMap.entrySet()) {
 
+        int mutableValue = value;
+
+        for (final Map.Entry<Character, Integer> entry : multipleOfTenMap.entrySet()) {
             final Character numeral = entry.getKey();
             final Integer numeralValue = entry.getValue();
 
-            final int quotient = value / numeralValue;
-            if (value < 10) {
-                repeatValue(builder, numeral, quotient);
-            } else if (builder.length() == 0 && quotient > 0) {
-                builder.append(numeral);
-            }
-
+            final int quotient = mutableValue / numeralValue;
+            repeatValue(builder, numeral, quotient);
+            mutableValue -= numeralValue * quotient;
         }
         return builder.toString();
     }
