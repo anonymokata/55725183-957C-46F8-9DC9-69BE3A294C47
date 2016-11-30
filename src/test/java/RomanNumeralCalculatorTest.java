@@ -24,4 +24,19 @@ public class RomanNumeralCalculatorTest {
         assertThat(calculator.add("II", "I")).isEqualTo("III");
     }
 
+    @Test
+    public void add_willReturnInformativeStringWhenTheLeftValueIsNotAValidNumeral() {
+        assertThat(calculator.add("Z", "II")).isEqualTo("Error: The left operand is not a valid numeral.");
+    }
+
+    @Test
+    public void add_willReturnInformativeStringWhenTheRightValueIsNotAValidNumeral() {
+        assertThat(calculator.add("III", "Z")).isEqualTo("Error: The right operand is not a valid numeral.");
+    }
+
+    @Test
+    public void add_willReturnInformativeStringWhenTheNeitherValueIsNotAValidNumeral() {
+        assertThat(calculator.add("ZZZ", "Z")).isEqualTo("Error: Both operands are not valid numerals.");
+    }
+
 }
