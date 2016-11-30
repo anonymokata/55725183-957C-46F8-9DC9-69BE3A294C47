@@ -14,27 +14,23 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
-    public void toInteger_WillConvertSingleValue_I() throws Exception {
+    public void toInteger_WillConvertSingleValue_PowersOfTen() throws Exception {
         assertThat(this.converter.toInteger("I")).isEqualTo(1);
-    }
-
-    @Test
-    public void toInteger_WillConvertSingleValue_X() throws Exception {
         assertThat(this.converter.toInteger("X")).isEqualTo(10);
-    }
-
-    @Test
-    public void toInteger_WillConvertSingleValue_C() throws Exception {
         assertThat(this.converter.toInteger("C")).isEqualTo(100);
     }
 
     @Test
-    public void toIntegerWillConvertRepeatedValues_II() throws Exception {
+    public void toIntegerWillConvertTwoRepeatedValues_PowersOfTen() throws Exception {
         assertThat(this.converter.toInteger("II")).isEqualTo(2);
+        assertThat(this.converter.toInteger("XX")).isEqualTo(20);
+        assertThat(this.converter.toInteger("CC")).isEqualTo(200);
     }
 
     @Test
-    public void toIntegerWillConvertRepeatedValues_III() throws Exception {
+    public void toIntegerWillConvertThreeRepeatedValues_PowersOfTen() throws Exception {
         assertThat(this.converter.toInteger("III")).isEqualTo(3);
+        assertThat(this.converter.toInteger("XXX")).isEqualTo(30);
+        assertThat(this.converter.toInteger("CCC")).isEqualTo(300);
     }
 }
