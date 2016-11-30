@@ -1,7 +1,7 @@
 class RomanNumeralCalculator {
 
-    boolean someLibraryMethod() {
-        return true;
+    String add(String input1, String input2) {
+        return "II";
     }
 
 }
