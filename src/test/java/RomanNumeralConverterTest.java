@@ -62,4 +62,11 @@ public class RomanNumeralConverterTest {
         assertThat(this.converter.toNumeral(20)).isEqualTo("XX");
         assertThat(this.converter.toNumeral(200)).isEqualTo("CC");
     }
+
+    @Test
+    public void toNumeral_WillConvertToSingleColumnNumeral_HalfPowersOfTen() throws Exception {
+        assertThat(this.converter.toNumeral(5)).isEqualTo("V");
+        assertThat(this.converter.toNumeral(50)).isEqualTo("L");
+        assertThat(this.converter.toNumeral(500)).isEqualTo("D");
+    }
 }

@@ -4,18 +4,29 @@ import java.util.Optional;
 
 class RomanNumeralConverter {
 
+    private final List<NumeralValueTuple> sortedNumerals;
     private final List<NumeralValueTuple> sortedPowersOfTen;
     private final List<NumeralValueTuple> sortedHalfPowersOfTen;
 
     RomanNumeralConverter() {
-        sortedPowersOfTen = Arrays.asList(
+        this.sortedNumerals = Arrays.asList(
+                new NumeralValueTuple('M', 1000),
+                new NumeralValueTuple('D', 500),
+                new NumeralValueTuple('C', 100),
+                new NumeralValueTuple('L', 50),
+                new NumeralValueTuple('X', 10),
+                new NumeralValueTuple('V', 5),
+                new NumeralValueTuple('I', 1)
+        );
+
+        this.sortedPowersOfTen = Arrays.asList(
                 new NumeralValueTuple('M', 1000),
                 new NumeralValueTuple('C', 100),
                 new NumeralValueTuple('X', 10),
                 new NumeralValueTuple('I', 1)
         );
 
-        sortedHalfPowersOfTen = Arrays.asList(
+        this.sortedHalfPowersOfTen = Arrays.asList(
                 new NumeralValueTuple('D', 500),
                 new NumeralValueTuple('L', 50),
                 new NumeralValueTuple('V', 5)
@@ -54,7 +65,7 @@ class RomanNumeralConverter {
     private String reduceValueUntilRenderedAsNumeral(int remainingValue) {
         final StringBuilder builder = new StringBuilder();
 
-        for (final NumeralValueTuple numeralTuple : sortedPowersOfTen) {
+        for (final NumeralValueTuple numeralTuple : this.sortedNumerals) {
             final int valueConsumed = applyNumeralToString(builder, remainingValue, numeralTuple);
             remainingValue -= valueConsumed;
         }
