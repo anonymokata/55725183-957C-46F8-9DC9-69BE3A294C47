@@ -14,7 +14,17 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
-    public void toIntegerWillConvertSimpleCase() throws Exception {
+    public void toInteger_WillConvertSimpleCase_I() throws Exception {
         assertThat(this.converter.toInteger("I")).isEqualTo(1);
+    }
+
+    @Test
+    public void toIntegerWillConvertRepeatedValues_II() throws Exception {
+        assertThat(this.converter.toInteger("II")).isEqualTo(2);
+    }
+
+    @Test
+    public void toIntegerWillConvertRepeatedValues_III() throws Exception {
+        assertThat(this.converter.toInteger("III")).isEqualTo(3);
     }
 }
