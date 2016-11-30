@@ -25,6 +25,12 @@ public class RomanNumeralCalculatorTest {
     }
 
     @Test
+    public void add_willHandleNonMultiplesOfTen() {
+        assertThat(calculator.add("V", "V")).isEqualTo("X");
+        assertThat(calculator.add("D", "D")).isEqualTo("M");
+    }
+
+    @Test
     public void add_willReturnInformativeStringWhenTheLeftValueIsNotAValidNumeral() {
         assertThat(calculator.add("Z", "II")).isEqualTo("Error: The left operand is not a valid numeral.");
     }
