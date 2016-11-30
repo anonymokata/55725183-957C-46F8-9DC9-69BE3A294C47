@@ -34,9 +34,10 @@ public class RomanNumeralConverterTest {
         assertThat(this.converter.toInteger("CCC")).isEqualTo(300);
     }
 
-
     @Test
-    public void toNumeral_WillConvertToSingleColumnNumeral_Simple() throws Exception {
+    public void toNumeral_WillConvertToSingleColumnNumeral_PowersOfTen() throws Exception {
         assertThat(this.converter.toNumeral(1)).isEqualTo("I");
+        assertThat(this.converter.toNumeral(10)).isEqualTo("X");
+        assertThat(this.converter.toNumeral(100)).isEqualTo("C");
     }
 }

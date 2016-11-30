@@ -16,7 +16,12 @@ class RomanNumeralConverter {
         return numeral.length() * multipleOfTenMap.get(numeral.charAt(0));
     }
 
-    String toNumeral(final int Integer) {
-        return "I";
+    String toNumeral(final int value) {
+        for (final Map.Entry<Character, Integer> entry : multipleOfTenMap.entrySet()) {
+            if (entry.getValue().equals(value)) {
+                return entry.getKey().toString();
+            }
+        }
+        return "";
     }
 }
