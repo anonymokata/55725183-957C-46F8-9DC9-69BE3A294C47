@@ -15,23 +15,28 @@ public class RomanNumeralConverterTest {
 
     @Test
     public void toInteger_WillConvertSingleValue_PowersOfTen() throws Exception {
-        assertThat(this.converter.toInteger("I")).isEqualTo(1);
-        assertThat(this.converter.toInteger("X")).isEqualTo(10);
-        assertThat(this.converter.toInteger("C")).isEqualTo(100);
+        assertThat(this.converter.toInteger("I")).hasValue(1);
+        assertThat(this.converter.toInteger("X")).hasValue(10);
+        assertThat(this.converter.toInteger("C")).hasValue(100);
     }
 
     @Test
     public void toInteger_WillConvertTwoRepeatedValues_PowersOfTen() throws Exception {
-        assertThat(this.converter.toInteger("II")).isEqualTo(2);
-        assertThat(this.converter.toInteger("XX")).isEqualTo(20);
-        assertThat(this.converter.toInteger("CC")).isEqualTo(200);
+        assertThat(this.converter.toInteger("II")).hasValue(2);
+        assertThat(this.converter.toInteger("XX")).hasValue(20);
+        assertThat(this.converter.toInteger("CC")).hasValue(200);
     }
 
     @Test
     public void toInteger_WillConvertThreeRepeatedValues_PowersOfTen() throws Exception {
-        assertThat(this.converter.toInteger("III")).isEqualTo(3);
-        assertThat(this.converter.toInteger("XXX")).isEqualTo(30);
-        assertThat(this.converter.toInteger("CCC")).isEqualTo(300);
+        assertThat(this.converter.toInteger("III")).hasValue(3);
+        assertThat(this.converter.toInteger("XXX")).hasValue(30);
+        assertThat(this.converter.toInteger("CCC")).hasValue(300);
+    }
+
+    @Test
+    public void toInteger_WillReturnNoValueWhenAnUnsupportedCharacterOccurs() throws Exception {
+        assertThat(this.converter.toInteger("Z")).isEmpty();
     }
 
     @Test

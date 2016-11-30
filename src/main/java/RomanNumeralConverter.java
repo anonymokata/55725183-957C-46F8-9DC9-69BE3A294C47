@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 class RomanNumeralConverter {
 
@@ -32,16 +33,15 @@ class RomanNumeralConverter {
         );
     }
 
-    int toInteger(final String numeral) {
-        return numeral.length() * getValueFor(numeral.charAt(0));
+    Optional<Integer> toInteger(final String numeral) {
+        return getNumeralTupleFor(numeral.charAt(0))
+                .map(tuple -> tuple.getValue() * numeral.length());
     }
 
-    private Integer getValueFor(final char numeral) {
+    private Optional<NumeralValueTuple> getNumeralTupleFor(final char numeral) {
         return multiplesOfTen.stream()
                 .filter(tuple -> tuple.getNumeral().equals(numeral))
-                .findFirst()
-                .get()
-                .getValue();
+                .findFirst();
     }
 
     String toNumeral(final int value) {
