@@ -29,15 +29,36 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
-    public void toInteger_WillConvertNumeralThatIncreasesHalfPowerOfTen_Simple() throws Exception {
+    public void toInteger_WillConvertNumeralThatIncreasesHalfPowerOfTen_OneIncreaser() throws Exception {
         assertThat(this.converter.toInteger("VI")).hasValue(6);
         assertThat(this.converter.toInteger("LX")).hasValue(60);
         assertThat(this.converter.toInteger("DC")).hasValue(600);
     }
 
     @Test
+    public void toInteger_WillConvertNumeralThatIncreasesHalfPowerOfTen_TwoIncreasers() throws Exception {
+        assertThat(this.converter.toInteger("VII")).hasValue(7);
+        assertThat(this.converter.toInteger("LXX")).hasValue(70);
+        assertThat(this.converter.toInteger("DCC")).hasValue(700);
+    }
+
+    @Test
+    public void toInteger_WillConvertNumeralThatIncreasesHalfPowerOfTen_ThreeIncreasers() throws Exception {
+        assertThat(this.converter.toInteger("VIII")).hasValue(8);
+        assertThat(this.converter.toInteger("LXXX")).hasValue(80);
+        assertThat(this.converter.toInteger("DCCC")).hasValue(800);
+    }
+
+    @Test
+    public void toInteger_WillConvertNumeral_MultipleSubtractors() {
+        assertThat(this.converter.toInteger("XLIX")).hasValue(49);
+        assertThat(this.converter.toInteger("CMXCIV")).hasValue(994);
+    }
+
+    @Test
     public void toInteger_WillConvertNumeralThatReducesPowerOfTen_SingleReduction() throws Exception {
         assertThat(this.converter.toInteger("IV")).hasValue(4);
+        assertThat(this.converter.toInteger("IX")).hasValue(9);
     }
 
     @Test

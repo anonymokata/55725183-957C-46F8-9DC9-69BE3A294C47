@@ -42,9 +42,9 @@ class RomanNumeralConverter {
         int value = 0;
         NumeralValueTuple previous = nullTuple;
         for (final NumeralValueTuple tuple : numeralTuples) {
-
             if (previous.getValue() < tuple.getValue()) {
-                value = tuple.getValue() - value;
+                value -= previous.getValue();
+                value += tuple.getValue() - previous.getValue();
             } else {
                 value += tuple.getValue();
             }
