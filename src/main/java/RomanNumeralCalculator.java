@@ -1,5 +1,7 @@
-public class RomanNumeralCalculator {
-    public boolean someLibraryMethod() {
+class RomanNumeralCalculator {
+
+    boolean someLibraryMethod() {
         return true;
     }
+
 }
