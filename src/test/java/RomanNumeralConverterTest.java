@@ -18,6 +18,14 @@ public class RomanNumeralConverterTest {
         assertThat(this.converter.toInteger("I")).hasValue(1);
         assertThat(this.converter.toInteger("X")).hasValue(10);
         assertThat(this.converter.toInteger("C")).hasValue(100);
+        assertThat(this.converter.toInteger("M")).hasValue(1000);
+    }
+
+    @Test
+    public void toInteger_WillConvertSingleValue_HalfPowersOfTen() throws Exception {
+        assertThat(this.converter.toInteger("V")).hasValue(5);
+        assertThat(this.converter.toInteger("L")).hasValue(50);
+        assertThat(this.converter.toInteger("D")).hasValue(500);
     }
 
     @Test
@@ -25,6 +33,7 @@ public class RomanNumeralConverterTest {
         assertThat(this.converter.toInteger("II")).hasValue(2);
         assertThat(this.converter.toInteger("XX")).hasValue(20);
         assertThat(this.converter.toInteger("CC")).hasValue(200);
+        assertThat(this.converter.toInteger("MM")).hasValue(2000);
     }
 
     @Test
@@ -32,6 +41,7 @@ public class RomanNumeralConverterTest {
         assertThat(this.converter.toInteger("III")).hasValue(3);
         assertThat(this.converter.toInteger("XXX")).hasValue(30);
         assertThat(this.converter.toInteger("CCC")).hasValue(300);
+        assertThat(this.converter.toInteger("MMM")).hasValue(3000);
     }
 
     @Test

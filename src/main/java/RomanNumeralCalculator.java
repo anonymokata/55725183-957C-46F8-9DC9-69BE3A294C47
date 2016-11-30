@@ -12,6 +12,7 @@ class RomanNumeralCalculator {
 
         final Optional<Integer> leftInteger = converter.toInteger(input1);
         final Optional<Integer> rightInteger = converter.toInteger(input2);
+
         if (leftInteger.isPresent() && rightInteger.isPresent()) {
             final int value1 = leftInteger.get();
             final int value2 = rightInteger.get();
