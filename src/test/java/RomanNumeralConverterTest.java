@@ -40,4 +40,9 @@ public class RomanNumeralConverterTest {
         assertThat(this.converter.toNumeral(10)).isEqualTo("X");
         assertThat(this.converter.toNumeral(100)).isEqualTo("C");
     }
+
+    @Test
+    public void toNumeral_WillConvertToTwoColumnNumeral_SimpleCase() throws Exception {
+        assertThat(this.converter.toNumeral(2)).isEqualTo("II");
+    }
 }

@@ -13,10 +13,8 @@ public class RomanNumeralCalculatorTest {
     }
 
     @Test
-    public void addWillHandleTheMostSimpleCase() {
-        final String input1 = "I";
-        final String input2 = "I";
-        final String result = calculator.add(input1, input2);
+    public void add_willHandleTheMostSimpleCase() {
+        final String result = calculator.add("I", "I");
         assertThat(result).isEqualTo("II");
     }
 
