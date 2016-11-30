@@ -14,8 +14,18 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
-    public void toInteger_WillConvertSimpleCase_I() throws Exception {
+    public void toInteger_WillConvertSingleValue_I() throws Exception {
         assertThat(this.converter.toInteger("I")).isEqualTo(1);
+    }
+
+    @Test
+    public void toInteger_WillConvertSingleValue_X() throws Exception {
+        assertThat(this.converter.toInteger("X")).isEqualTo(10);
+    }
+
+    @Test
+    public void toInteger_WillConvertSingleValue_C() throws Exception {
+        assertThat(this.converter.toInteger("C")).isEqualTo(100);
     }
 
     @Test
