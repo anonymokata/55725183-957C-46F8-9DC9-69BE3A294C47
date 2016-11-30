@@ -21,16 +21,22 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
-    public void toIntegerWillConvertTwoRepeatedValues_PowersOfTen() throws Exception {
+    public void toInteger_WillConvertTwoRepeatedValues_PowersOfTen() throws Exception {
         assertThat(this.converter.toInteger("II")).isEqualTo(2);
         assertThat(this.converter.toInteger("XX")).isEqualTo(20);
         assertThat(this.converter.toInteger("CC")).isEqualTo(200);
     }
 
     @Test
-    public void toIntegerWillConvertThreeRepeatedValues_PowersOfTen() throws Exception {
+    public void toInteger_WillConvertThreeRepeatedValues_PowersOfTen() throws Exception {
         assertThat(this.converter.toInteger("III")).isEqualTo(3);
         assertThat(this.converter.toInteger("XXX")).isEqualTo(30);
         assertThat(this.converter.toInteger("CCC")).isEqualTo(300);
+    }
+
+
+    @Test
+    public void toNumeral_WillConvertToSingleColumnNumeral_Simple() throws Exception {
+        assertThat(this.converter.toNumeral(1)).isEqualTo("I");
     }
 }

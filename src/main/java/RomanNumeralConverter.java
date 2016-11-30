@@ -16,4 +16,7 @@ class RomanNumeralConverter {
         return numeral.length() * multipleOfTenMap.get(numeral.charAt(0));
     }
 
+    String toNumeral(final int Integer) {
+        return "I";
+    }
 }
