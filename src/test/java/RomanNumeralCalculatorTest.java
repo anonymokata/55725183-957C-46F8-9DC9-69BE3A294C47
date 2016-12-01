@@ -107,4 +107,17 @@ public class RomanNumeralCalculatorTest {
         assertThat(calculator.subtract("II", "I")).isEqualTo("I");
     }
 
+    @Test
+    public void subtract_typicalSimpleExamples() {
+        assertThat(calculator.subtract("X", "I")).isEqualTo("IX");
+        assertThat(calculator.subtract("VI", "I")).isEqualTo("V");
+        assertThat(calculator.subtract("VI", "II")).isEqualTo("IV");
+    }
+
+    @Test
+    public void toNumeral_WillHandleParticularlyUglySubtractions() {
+        assertThat(calculator.subtract("M", "I")).isEqualTo("CMXCIX");
+        assertThat(calculator.subtract("CMXCIX", "C")).isEqualTo("DCCCXCIX");
+        assertThat(calculator.subtract("DCCCXCIX", "DCCCXCVIII")).isEqualTo("I");
+    }
 }

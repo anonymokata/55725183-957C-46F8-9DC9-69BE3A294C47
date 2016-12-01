@@ -23,7 +23,8 @@ class RomanNumeralCalculator {
     }
 
     private String subtractInputs(final int value, final int subtractor) {
-        return "I";
+        final int result = value - subtractor;
+        return converter.toNumeral(result);
     }
 
     private String validateInputsAndPerformOperation(final String input1, final String input2, final Operation operation) {
