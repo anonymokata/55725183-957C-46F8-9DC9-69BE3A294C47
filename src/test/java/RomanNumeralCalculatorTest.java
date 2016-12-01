@@ -36,6 +36,12 @@ public class RomanNumeralCalculatorTest {
     }
 
     @Test
+    public void add_willHandleIncreasedMultiplesOfTenWell() {
+        checkAddIsCommutative("VII", "VII", "XIV");
+        checkAddIsCommutative("VIII", "VII", "XV");
+    }
+
+    @Test
     public void add_willHandleNumeralsThatReduceMultipleOfTen() {
         checkAddIsCommutative("IV", "I", "V");
     }

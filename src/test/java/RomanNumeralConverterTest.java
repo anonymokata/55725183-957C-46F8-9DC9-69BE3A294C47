@@ -102,4 +102,9 @@ public class RomanNumeralConverterTest {
         assertThat(this.converter.toNumeral(50)).isEqualTo("L");
         assertThat(this.converter.toNumeral(500)).isEqualTo("D");
     }
+
+    @Test
+    public void toNumeral_WillConvertToSingleColumnNumeral_ReducedHalfPowersOfTen() throws Exception {
+        assertThat(this.converter.toNumeral(4)).isEqualTo("IV");
+    }
 }

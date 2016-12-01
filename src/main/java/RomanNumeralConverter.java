@@ -82,10 +82,30 @@ class RomanNumeralConverter {
         return builder.toString();
     }
 
-    private int applyNumeralToString(final StringBuilder builder, final int mutableValue, final NumeralValueTuple numeralTuple) {
+    private int applyNumeralToString(final StringBuilder builder,
+                                     final int mutableValue,
+                                     final NumeralValueTuple numeralTuple) {
         final int quotient = mutableValue / numeralTuple.getValue();
-        repeatValue(builder, numeralTuple.getNumeral(), quotient);
+
+        if (quotient < 4) {
+            repeatValue(builder, numeralTuple.getNumeral(), quotient);
+        } else {
+            useReducedNumeral(builder, numeralTuple);
+        }
+
         return numeralTuple.getValue() * quotient;
+    }
+
+    private void useReducedNumeral(final StringBuilder builder, final NumeralValueTuple numeralTuple) {
+        final NumeralValueTuple nextHigherValueNumeral = getNextHigherValueNumeral(numeralTuple);
+
+        builder.append(numeralTuple.getNumeral());
+        builder.append(nextHigherValueNumeral.getNumeral());
+    }
+
+    private NumeralValueTuple getNextHigherValueNumeral(final NumeralValueTuple numeralTuple) {
+        final int numeralTupleIndex = this.sortedNumerals.indexOf(numeralTuple);
+        return this.sortedNumerals.get(numeralTupleIndex - 1);
     }
 
     private void repeatValue(final StringBuilder builder, final Character numeral, final int quotient) {
