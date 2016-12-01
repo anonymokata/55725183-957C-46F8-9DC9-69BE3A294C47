@@ -127,4 +127,13 @@ public class RomanNumeralCalculatorTest {
         assertThat(calculator.subtract("I", "II")).isEqualTo("Error: Result is not a valid numeral.");
         assertThat(calculator.subtract("X", "C")).isEqualTo("Error: Result is not a valid numeral.");
     }
+
+    @Test
+    public void testSuggestionsFromOtherDevelopers() throws Exception {
+        assertThat(calculator.add("MVI", "CX")).isEqualTo("MCXVI");
+        assertThat(calculator.add("MCDXLVII", "CCCXXII")).isEqualTo("MDCCLXIX");
+        assertThat(calculator.subtract("MMM", "I")).isEqualTo("MMCMXCIX");
+        assertThat(calculator.subtract("CCLXXV", "LIV")).isEqualTo("CCXXI");
+        assertThat(calculator.subtract("MCXV", "DLVI")).isEqualTo("DLIX");
+    }
 }
