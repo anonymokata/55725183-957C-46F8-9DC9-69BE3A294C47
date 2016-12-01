@@ -1,3 +1,5 @@
+package convertions;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,7 +19,31 @@ class NumeralToIntegerConverter {
                 .map(this::unpackOptional)
                 .collect(Collectors.toList());
 
+        if (numeralRulesAreBroken(numeralTuples)) {
+            return Optional.empty();
+        }
+
         return Optional.of(this.computeValueOfNumerals(numeralTuples));
+    }
+
+    private boolean numeralRulesAreBroken(final List<NumeralValueTuple> numeralTuples) {
+        int repeatCount = 0;
+
+        NumeralValueTuple previous = NumeralValueTuple.NULL_TUPLE;
+        for (final NumeralValueTuple tuple : numeralTuples) {
+            if (tuple == previous) {
+                repeatCount++;
+            } else {
+                repeatCount = 1;
+            }
+
+            if (repeatCount > tuple.getType().getMaxNumberOfRepetitions()) {
+                return true;
+            }
+
+            previous = tuple;
+        }
+        return false;
     }
 
     private int computeValueOfNumerals(final List<NumeralValueTuple> numeralTuples) {

@@ -86,4 +86,20 @@ public class RomanNumeralCalculatorTest {
         assertThat(calculator.add("ZZZ", "Z")).isEqualTo("Error: Both operands are not valid numerals.");
     }
 
+
+    @Test
+    public void subtract_willReturnInformativeStringWhenTheLeftValueIsNotAValidNumeral() {
+        assertThat(calculator.subtract("Z", "II")).isEqualTo("Error: The left operand is not a valid numeral.");
+    }
+
+    @Test
+    public void subtract_willReturnInformativeStringWhenTheRightValueIsNotAValidNumeral() {
+        assertThat(calculator.subtract("III", "Z")).isEqualTo("Error: The right operand is not a valid numeral.");
+    }
+
+    @Test
+    public void subtract_willReturnInformativeStringWhenTheNeitherValueIsNotAValidNumeral() {
+        assertThat(calculator.subtract("ZZZ", "Z")).isEqualTo("Error: Both operands are not valid numerals.");
+    }
+
 }

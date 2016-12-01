@@ -1,3 +1,5 @@
+import convertions.RomanNumeralConverter;
+
 import java.util.Optional;
 
 class RomanNumeralCalculator {
@@ -9,7 +11,18 @@ class RomanNumeralCalculator {
     }
 
     String add(final String input1, final String input2) {
+        return validateInputsAndPerformOperation(input1, input2, this::addInputs);
+    }
 
+    private String addInputs(final int value1, final int value2) {
+        return converter.toNumeral(value1 + value2);
+    }
+
+    String subtract(final String input1, final String input2) {
+        return validateInputsAndPerformOperation(input1, input2, (a, b) -> "");
+    }
+
+    private String validateInputsAndPerformOperation(final String input1, final String input2, final Operation operation) {
         final Optional<Integer> leftInteger = converter.toInteger(input1);
         final Optional<Integer> rightInteger = converter.toInteger(input2);
 
@@ -17,7 +30,7 @@ class RomanNumeralCalculator {
             final int value1 = leftInteger.get();
             final int value2 = rightInteger.get();
 
-            return converter.toNumeral(value1 + value2);
+            return operation.perform(value1, value2);
         } else {
             if (!leftInteger.isPresent() && !rightInteger.isPresent()) {
                 return "Error: Both operands are not valid numerals.";
@@ -29,4 +42,8 @@ class RomanNumeralCalculator {
         }
     }
 
+    @FunctionalInterface
+    interface Operation {
+        String perform(int input1, int input2);
+    }
 }

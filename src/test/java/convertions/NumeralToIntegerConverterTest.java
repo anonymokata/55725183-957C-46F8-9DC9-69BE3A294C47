@@ -1,3 +1,5 @@
+package convertions;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -83,4 +85,17 @@ public class NumeralToIntegerConverterTest {
         assertThat(this.converter.toInteger("Well this really is not appropriate.")).isEmpty();
     }
 
+    @Test
+    public void toInteger_willReturnNoValueWhenTheMaxNumberOfRepeatedPowersOfTenRuleIsBroken() throws Exception {
+        assertThat(this.converter.toInteger("IIII")).isEmpty();
+        assertThat(this.converter.toInteger("XXXX")).isEmpty();
+        assertThat(this.converter.toInteger("MMMMMM")).isEmpty();
+    }
+
+    @Test
+    public void toInteger_willReturnNoValueWhenTheMaxNumberOfRepeatedHalfPowersOfTenRuleIsBroken() throws Exception {
+        assertThat(this.converter.toInteger("VV")).isEmpty();
+        assertThat(this.converter.toInteger("LLL")).isEmpty();
+        assertThat(this.converter.toInteger("DD")).isEmpty();
+    }
 }
