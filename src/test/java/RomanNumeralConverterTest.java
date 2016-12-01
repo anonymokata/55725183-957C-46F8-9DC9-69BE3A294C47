@@ -109,4 +109,11 @@ public class RomanNumeralConverterTest {
         assertThat(this.converter.toNumeral(40)).isEqualTo("XL");
         assertThat(this.converter.toNumeral(400)).isEqualTo("CD");
     }
+
+    @Test
+    public void toNumeral_WillConvertToSingleColumnNumeral_ReducedPowersOfTen() throws Exception {
+        assertThat(this.converter.toNumeral(9)).isEqualTo("IX");
+        assertThat(this.converter.toNumeral(90)).isEqualTo("XC");
+        assertThat(this.converter.toNumeral(900)).isEqualTo("CM");
+    }
 }

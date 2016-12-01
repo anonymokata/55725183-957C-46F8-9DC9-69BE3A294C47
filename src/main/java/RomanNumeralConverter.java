@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 class RomanNumeralConverter {
@@ -19,7 +20,7 @@ class RomanNumeralConverter {
                 new NumeralValueTuple('I', 1)
         );
 
-        nullTuple = new NumeralValueTuple(' ', 0);
+        this.nullTuple = new NumeralValueTuple(' ', 0);
     }
 
     Optional<Integer> toInteger(final String numeral) {
@@ -87,6 +88,10 @@ class RomanNumeralConverter {
                                      final NumeralValueTuple numeralTuple) {
         final int quotient = mutableValue / numeralTuple.getValue();
 
+        if (quotient == 0) {
+            return 0;
+        }
+
         if (quotient < 4) {
             repeatValue(builder, numeralTuple.getNumeral(), quotient);
         } else {
@@ -99,8 +104,22 @@ class RomanNumeralConverter {
     private void useReducedNumeral(final StringBuilder builder, final NumeralValueTuple numeralTuple) {
         final NumeralValueTuple nextHigherValueNumeral = getNextHigherValueNumeral(numeralTuple);
 
-        builder.append(numeralTuple.getNumeral());
-        builder.append(nextHigherValueNumeral.getNumeral());
+        if (nextHigherValueNumeralWasPreviouslyUsed(builder, nextHigherValueNumeral)) {
+            final NumeralValueTuple nextNextHigherValueNumeral = getNextHigherValueNumeral(nextHigherValueNumeral);
+            builder.deleteCharAt(builder.length() - 1);
+            builder.append(numeralTuple.getNumeral());
+            builder.append(nextNextHigherValueNumeral.getNumeral());
+        } else {
+            builder.append(numeralTuple.getNumeral());
+            builder.append(nextHigherValueNumeral.getNumeral());
+        }
+    }
+
+    private boolean nextHigherValueNumeralWasPreviouslyUsed(final StringBuilder builder, final NumeralValueTuple nextHigherValueNumeral) {
+        final OptionalInt previousNumeralChar = builder.toString().chars().reduce((first, second) -> second);
+
+        return previousNumeralChar.isPresent()
+                && (char) previousNumeralChar.getAsInt() == nextHigherValueNumeral.getNumeral();
     }
 
     private NumeralValueTuple getNextHigherValueNumeral(final NumeralValueTuple numeralTuple) {
