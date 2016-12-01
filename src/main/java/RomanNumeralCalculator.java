@@ -15,16 +15,16 @@ class RomanNumeralCalculator {
         this.converter = new RomanNumeralConverter();
     }
 
-    String add(final String input1, final String input2) {
-        return validateInputsAndPerformOperation(input1, input2, this::addInputs);
+    String add(final String summand1, final String summand2) {
+        return validateInputsAndPerformOperation(summand1, summand2, this::addInputs);
     }
 
     private Optional<String> addInputs(final int value1, final int value2) {
         return converter.toNumeral(value1 + value2);
     }
 
-    String subtract(final String input1, final String input2) {
-        return validateInputsAndPerformOperation(input1, input2, this::subtractInputs);
+    String subtract(final String minuend, final String subtrahend) {
+        return validateInputsAndPerformOperation(minuend, subtrahend, this::subtractInputs);
     }
 
     private Optional<String> subtractInputs(final int value, final int subtractor) {
