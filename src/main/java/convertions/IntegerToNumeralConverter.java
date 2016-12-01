@@ -30,7 +30,7 @@ class IntegerToNumeralConverter {
                                      final NumeralValueTuple numeralTuple) {
         final int quotient = mutableValue / numeralTuple.getValue();
 
-        if (quotient < 4) {
+        if (quotient <= numeralTuple.getType().getMaxNumberOfRepetitions()) {
             repeatValue(builder, numeralTuple.getNumeral(), quotient);
         } else {
             useReducedNumeral(builder, numeralTuple);
@@ -49,8 +49,9 @@ class IntegerToNumeralConverter {
         final NumeralValueTuple nextHigherValueNumeral = getNextHigherValueNumeral(numeralTuple);
 
         if (nextHigherValueNumeralWasPreviouslyUsed(builder, nextHigherValueNumeral)) {
+            overwritePreviousCharacter(builder);
+
             final NumeralValueTuple nextNextHigherValueNumeral = getNextHigherValueNumeral(nextHigherValueNumeral);
-            builder.deleteCharAt(builder.length() - 1);
             builder.append(numeralTuple.getNumeral());
             builder.append(nextNextHigherValueNumeral.getNumeral());
         } else {
@@ -59,12 +60,16 @@ class IntegerToNumeralConverter {
         }
     }
 
+    private void overwritePreviousCharacter(final StringBuilder builder) {
+        builder.deleteCharAt(builder.length() - 1);
+    }
+
     private boolean nextHigherValueNumeralWasPreviouslyUsed(
             final StringBuilder builder, final NumeralValueTuple nextHigherValueNumeral
     ) {
         final String numeralSoFar = builder.toString();
 
-        if (numeralSoFar.length() == 0) {
+        if (numeralSoFar.isEmpty()) {
             return false;
         }
         final char previousNumeralChar = numeralSoFar.charAt(numeralSoFar.length() - 1);
