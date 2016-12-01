@@ -116,4 +116,12 @@ public class RomanNumeralConverterTest {
         assertThat(this.converter.toNumeral(90)).isEqualTo("XC");
         assertThat(this.converter.toNumeral(900)).isEqualTo("CM");
     }
+
+
+    @Test
+    public void toNumeral_WillConvertNumeral_MultipleSubtractors() {
+        assertThat(this.converter.toNumeral(49)).isEqualTo("XLIX");
+        assertThat(this.converter.toNumeral(994)).isEqualTo("CMXCIV");
+    }
+
 }

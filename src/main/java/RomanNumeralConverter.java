@@ -1,7 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 class RomanNumeralConverter {
@@ -115,11 +114,17 @@ class RomanNumeralConverter {
         }
     }
 
-    private boolean nextHigherValueNumeralWasPreviouslyUsed(final StringBuilder builder, final NumeralValueTuple nextHigherValueNumeral) {
-        final OptionalInt previousNumeralChar = builder.toString().chars().reduce((first, second) -> second);
+    private boolean nextHigherValueNumeralWasPreviouslyUsed(
+            final StringBuilder builder, final NumeralValueTuple nextHigherValueNumeral
+    ) {
+        final String numeralSoFar = builder.toString();
 
-        return previousNumeralChar.isPresent()
-                && (char) previousNumeralChar.getAsInt() == nextHigherValueNumeral.getNumeral();
+        if (numeralSoFar.length() == 0) {
+            return false;
+        }
+        final char previousNumeralChar = numeralSoFar.charAt(numeralSoFar.length() - 1);
+
+        return previousNumeralChar == nextHigherValueNumeral.getNumeral();
     }
 
     private NumeralValueTuple getNextHigherValueNumeral(final NumeralValueTuple numeralTuple) {
