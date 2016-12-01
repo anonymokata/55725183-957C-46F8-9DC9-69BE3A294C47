@@ -102,4 +102,9 @@ public class RomanNumeralCalculatorTest {
         assertThat(calculator.subtract("ZZZ", "Z")).isEqualTo("Error: Both operands are not valid numerals.");
     }
 
+    @Test
+    public void subtract_simplestCase() {
+        assertThat(calculator.subtract("II", "I")).isEqualTo("I");
+    }
+
 }

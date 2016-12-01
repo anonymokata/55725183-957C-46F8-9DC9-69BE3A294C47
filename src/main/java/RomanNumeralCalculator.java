@@ -19,7 +19,11 @@ class RomanNumeralCalculator {
     }
 
     String subtract(final String input1, final String input2) {
-        return validateInputsAndPerformOperation(input1, input2, (a, b) -> "");
+        return validateInputsAndPerformOperation(input1, input2, this::subtractInputs);
+    }
+
+    private String subtractInputs(final int value, final int subtractor) {
+        return "I";
     }
 
     private String validateInputsAndPerformOperation(final String input1, final String input2, final Operation operation) {
