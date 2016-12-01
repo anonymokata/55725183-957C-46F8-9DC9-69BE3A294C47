@@ -4,8 +4,11 @@ import java.util.Optional;
 
 class IntegerToNumeralConverter {
 
+    private static final int MAX_NUMERAL_VALUE = 4000;
+    private static final int MIN_NUMERAL_VALUE = 0;
+
     Optional<String> toNumeral(final int value) {
-        if (value <= 0) {
+        if (value <= MIN_NUMERAL_VALUE || value >= MAX_NUMERAL_VALUE) {
             return Optional.empty();
         }
 

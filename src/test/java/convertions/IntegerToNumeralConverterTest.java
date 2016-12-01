@@ -67,4 +67,15 @@ public class IntegerToNumeralConverterTest {
         assertThat(this.converter.toNumeral(Integer.MIN_VALUE)).isEmpty();
     }
 
+    @Test
+    public void toNumeral_WillHandleMaximumSupportedNumeralCorrectly() throws Exception {
+        assertThat(this.converter.toNumeral(3999)).hasValue("MMMCMXCIX");
+    }
+
+    @Test
+    public void toNumeral_WillReturnErrorWhenBeyondMaximumSupportedNumeral() throws Exception {
+        assertThat(this.converter.toNumeral(4000)).isEmpty();
+        assertThat(this.converter.toNumeral(5000)).isEmpty();
+        assertThat(this.converter.toNumeral(10000)).isEmpty();
+    }
 }
