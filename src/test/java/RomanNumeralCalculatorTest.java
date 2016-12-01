@@ -53,6 +53,12 @@ public class RomanNumeralCalculatorTest {
     @Test
     public void add_canProduceComplexNumerals() {
         checkAddIsCommutative("LX", "IX", "LXIX");
+        checkAddIsCommutative("MCDXLVII", "II", "MCDXLIX");
+    }
+
+    @Test
+    public void add_ExampleFromKataInstructions() throws Exception {
+        checkAddIsCommutative("XIV", "LX", "LXXIV");
     }
 
     @Test
