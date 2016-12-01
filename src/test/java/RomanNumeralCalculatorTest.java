@@ -42,6 +42,20 @@ public class RomanNumeralCalculatorTest {
     }
 
     @Test
+    public void add_canProduceReducedMultiplesOfTen() {
+        checkAddIsCommutative("VII", "II", "IX");
+        checkAddIsCommutative("V", "IV", "IX");
+
+        checkAddIsCommutative("L", "XL", "XC");
+        checkAddIsCommutative("XXI", "LXIX", "XC");
+    }
+
+    @Test
+    public void add_canProduceComplexNumerals() {
+        checkAddIsCommutative("LX", "IX", "LXIX");
+    }
+
+    @Test
     public void add_willHandleNumeralsThatReduceMultipleOfTen() {
         checkAddIsCommutative("IV", "I", "V");
     }
