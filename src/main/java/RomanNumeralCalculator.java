@@ -14,22 +14,16 @@ class RomanNumeralCalculator {
         return validateInputsAndPerformOperation(input1, input2, this::addInputs);
     }
 
-    private String addInputs(final int value1, final int value2) {
-        return converter.toNumeral(value1 + value2).get();
-    }
-
     String subtract(final String input1, final String input2) {
         return validateInputsAndPerformOperation(input1, input2, this::subtractInputs);
     }
 
-    private String subtractInputs(final int value, final int subtractor) {
-        final int result = value - subtractor;
-        final Optional<String> numeral = converter.toNumeral(result);
-        if (numeral.isPresent()) {
-            return numeral.get();
-        } else {
-            return "Error: Result is not a valid numeral.";
-        }
+    private Optional<String> addInputs(final int value1, final int value2) {
+        return converter.toNumeral(value1 + value2);
+    }
+
+    private Optional<String> subtractInputs(final int value, final int subtractor) {
+        return converter.toNumeral(value - subtractor);
     }
 
     private String validateInputsAndPerformOperation(final String input1, final String input2, final Operation operation) {
@@ -40,7 +34,13 @@ class RomanNumeralCalculator {
             final int value1 = leftInteger.get();
             final int value2 = rightInteger.get();
 
-            return operation.perform(value1, value2);
+            final Optional<String> result = operation.perform(value1, value2);
+
+            if (result.isPresent()) {
+                return result.get();
+            } else {
+                return "Error: Result is not a valid numeral.";
+            }
         } else {
             if (!leftInteger.isPresent() && !rightInteger.isPresent()) {
                 return "Error: Both operands are not valid numerals.";
@@ -54,6 +54,6 @@ class RomanNumeralCalculator {
 
     @FunctionalInterface
     interface Operation {
-        String perform(int input1, int input2);
+        Optional<String> perform(int input1, int input2);
     }
 }
