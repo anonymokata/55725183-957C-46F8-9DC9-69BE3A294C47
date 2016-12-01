@@ -16,43 +16,55 @@ public class IntegerToNumeralConverterTest {
 
     @Test
     public void toNumeral_WillConvertToSingleColumnNumeral_PowersOfTen() throws Exception {
-        assertThat(this.converter.toNumeral(1)).isEqualTo("I");
-        assertThat(this.converter.toNumeral(10)).isEqualTo("X");
-        assertThat(this.converter.toNumeral(100)).isEqualTo("C");
+        assertThat(this.converter.toNumeral(1)).hasValue("I");
+        assertThat(this.converter.toNumeral(10)).hasValue("X");
+        assertThat(this.converter.toNumeral(100)).hasValue("C");
     }
 
     @Test
     public void toNumeral_WillConvertToTwoColumnNumeral_PowersOfTen() throws Exception {
-        assertThat(this.converter.toNumeral(2)).isEqualTo("II");
-        assertThat(this.converter.toNumeral(20)).isEqualTo("XX");
-        assertThat(this.converter.toNumeral(200)).isEqualTo("CC");
+        assertThat(this.converter.toNumeral(2)).hasValue("II");
+        assertThat(this.converter.toNumeral(20)).hasValue("XX");
+        assertThat(this.converter.toNumeral(200)).hasValue("CC");
     }
 
     @Test
     public void toNumeral_WillConvertToSingleColumnNumeral_HalfPowersOfTen() throws Exception {
-        assertThat(this.converter.toNumeral(5)).isEqualTo("V");
-        assertThat(this.converter.toNumeral(50)).isEqualTo("L");
-        assertThat(this.converter.toNumeral(500)).isEqualTo("D");
+        assertThat(this.converter.toNumeral(5)).hasValue("V");
+        assertThat(this.converter.toNumeral(50)).hasValue("L");
+        assertThat(this.converter.toNumeral(500)).hasValue("D");
     }
 
     @Test
     public void toNumeral_WillConvertToSingleColumnNumeral_ReducedHalfPowersOfTen() throws Exception {
-        assertThat(this.converter.toNumeral(4)).isEqualTo("IV");
-        assertThat(this.converter.toNumeral(40)).isEqualTo("XL");
-        assertThat(this.converter.toNumeral(400)).isEqualTo("CD");
+        assertThat(this.converter.toNumeral(4)).hasValue("IV");
+        assertThat(this.converter.toNumeral(40)).hasValue("XL");
+        assertThat(this.converter.toNumeral(400)).hasValue("CD");
     }
 
     @Test
     public void toNumeral_WillConvertToSingleColumnNumeral_ReducedPowersOfTen() throws Exception {
-        assertThat(this.converter.toNumeral(9)).isEqualTo("IX");
-        assertThat(this.converter.toNumeral(90)).isEqualTo("XC");
-        assertThat(this.converter.toNumeral(900)).isEqualTo("CM");
+        assertThat(this.converter.toNumeral(9)).hasValue("IX");
+        assertThat(this.converter.toNumeral(90)).hasValue("XC");
+        assertThat(this.converter.toNumeral(900)).hasValue("CM");
     }
 
     @Test
     public void toNumeral_WillConvertNumeral_MultipleSubtractors() {
-        assertThat(this.converter.toNumeral(49)).isEqualTo("XLIX");
-        assertThat(this.converter.toNumeral(994)).isEqualTo("CMXCIV");
+        assertThat(this.converter.toNumeral(49)).hasValue("XLIX");
+        assertThat(this.converter.toNumeral(994)).hasValue("CMXCIV");
+    }
+
+    @Test
+    public void toNumeral_WillReturnNoNumeralWhenValueIsZero() throws Exception {
+        assertThat(this.converter.toNumeral(0)).isEmpty();
+    }
+
+    @Test
+    public void toNumeral_WillReturnNoNumeralWhenValueLessThanZero() throws Exception {
+        assertThat(this.converter.toNumeral(-1)).isEmpty();
+        assertThat(this.converter.toNumeral(-10)).isEmpty();
+        assertThat(this.converter.toNumeral(Integer.MIN_VALUE)).isEmpty();
     }
 
 }

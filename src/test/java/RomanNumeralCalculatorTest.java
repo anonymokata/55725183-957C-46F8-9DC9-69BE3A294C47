@@ -115,9 +115,16 @@ public class RomanNumeralCalculatorTest {
     }
 
     @Test
-    public void toNumeral_WillHandleParticularlyUglySubtractions() {
+    public void subtract_WillHandleParticularlyUglySubtractions() {
         assertThat(calculator.subtract("M", "I")).isEqualTo("CMXCIX");
         assertThat(calculator.subtract("CMXCIX", "C")).isEqualTo("DCCCXCIX");
         assertThat(calculator.subtract("DCCCXCIX", "DCCCXCVIII")).isEqualTo("I");
+    }
+
+    @Test
+    public void subtract_WillErrorWhenResultIsNotAValidNumeral() throws Exception {
+        assertThat(calculator.subtract("I", "I")).isEqualTo("Error: Result is not a valid numeral.");
+        assertThat(calculator.subtract("I", "II")).isEqualTo("Error: Result is not a valid numeral.");
+        assertThat(calculator.subtract("X", "C")).isEqualTo("Error: Result is not a valid numeral.");
     }
 }

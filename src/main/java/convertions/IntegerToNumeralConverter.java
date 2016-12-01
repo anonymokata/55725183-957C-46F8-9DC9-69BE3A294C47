@@ -1,9 +1,15 @@
 package convertions;
 
+import java.util.Optional;
+
 class IntegerToNumeralConverter {
 
-    String toNumeral(final int value) {
-        return reduceValueUntilRenderedAsNumeral(value);
+    Optional<String> toNumeral(final int value) {
+        if (value <= 0) {
+            return Optional.empty();
+        }
+
+        return Optional.of(reduceValueUntilRenderedAsNumeral(value));
     }
 
     private String reduceValueUntilRenderedAsNumeral(int remainingValue) {

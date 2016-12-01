@@ -15,7 +15,7 @@ class RomanNumeralCalculator {
     }
 
     private String addInputs(final int value1, final int value2) {
-        return converter.toNumeral(value1 + value2);
+        return converter.toNumeral(value1 + value2).get();
     }
 
     String subtract(final String input1, final String input2) {
@@ -24,7 +24,12 @@ class RomanNumeralCalculator {
 
     private String subtractInputs(final int value, final int subtractor) {
         final int result = value - subtractor;
-        return converter.toNumeral(result);
+        final Optional<String> numeral = converter.toNumeral(result);
+        if (numeral.isPresent()) {
+            return numeral.get();
+        } else {
+            return "Error: Result is not a valid numeral.";
+        }
     }
 
     private String validateInputsAndPerformOperation(final String input1, final String input2, final Operation operation) {

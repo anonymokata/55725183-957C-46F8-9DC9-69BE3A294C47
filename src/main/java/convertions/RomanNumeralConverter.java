@@ -16,7 +16,7 @@ public class RomanNumeralConverter {
         return this.numeralToIntegerConverter.toInteger(numeral);
     }
 
-    public String toNumeral(final int value) {
+    public Optional<String> toNumeral(final int value) {
         return this.integerToNumeralConverter.toNumeral(value);
     }
 }
